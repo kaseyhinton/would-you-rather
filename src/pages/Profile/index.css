@@ -1,0 +1,22 @@
+.profile {}
+
+.titles {
+	font-family: var(--font-header), var(--font-list);
+	text-transform: uppercase;
+	margin-top: 80px;
+	text-align: center;
+}
+
+.titles h1 {
+	font-size: 2.875em;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.titles h3 {
+	line-height: 2;
+	font-weight: 200;
+	letter-spacing: 2px;
+	font-size: 1.25em;
+	color: #5e7283;
+}
