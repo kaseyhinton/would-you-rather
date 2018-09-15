@@ -12,6 +12,7 @@ const load = loader => Loadable({ loader, loading });
 const Home = load(() => import('@pages/Home'));
 const Profile = load(() => import('@pages/Profile'));
 const LeaderBoard = load(() => import('@pages/LeaderBoard'));
+const Login = load(() => import('@pages/Login'));
 
 class App extends React.Component {
 	componentDidMount() {
@@ -30,6 +31,7 @@ class App extends React.Component {
 					<Route path="/" exact component={ Home } />
 					<Route path="/leaderboard" exact component={ LeaderBoard } />
 					<Route path="/profile" exact component={ Profile } />
+					<Route path="/login" exact component={ Login } />
 					{/* <Route path="/blog/:title" component={ Article } /> */}
 				</main>
 
