@@ -6,7 +6,8 @@ import Footer from "@components/Footer";
 import style from "./index.css";
 import Nav from "../Nav";
 
-import {store} from "../../store";
+import { store } from "../../store";
+import { getUsers } from "../../actions/users";
 
 store.subscribe(() => {
   console.log(store.getState());
@@ -28,6 +29,8 @@ class App extends React.Component {
         if (window.ga) ga.send("pageview", { dp: obj.pathname });
       });
     }
+
+    store.dispatch(getUsers());
   }
 
   render() {

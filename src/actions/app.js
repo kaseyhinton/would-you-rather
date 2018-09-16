@@ -1,4 +1,5 @@
 export const LOGIN_USER = "LOGIN_USER";
+export const APOLOGIZE = "APOLOGIZE";
 
 export const loginUserAction = user => {
   return {
@@ -6,3 +7,10 @@ export const loginUserAction = user => {
     user
   };
 };
+
+export const apologize = error => {
+    return {
+      type: APOLOGIZE,
+      error
+    };
+  };
