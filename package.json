@@ -10,7 +10,9 @@
     "react": "latest",
     "react-dom": "latest",
     "react-loadable": "latest",
+    "react-redux": "^5.0.7",
     "react-router-dom": "latest",
+    "redux": "^4.0.0",
     "rmwc": "^2.1.0",
     "sirv-cli": "latest"
   },
