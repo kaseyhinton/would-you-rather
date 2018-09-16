@@ -16,8 +16,8 @@ import { Card, CardActions } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { Select } from "@rmwc/select";
 
-import {loginUserAction} from '../../actions/app';
-import {store} from '../../store';
+import { loginUserAction } from "../../actions/app";
+import { store } from "../../store";
 
 function Login() {
   return (
@@ -37,6 +37,9 @@ function Login() {
           placeholder=""
           className={style.select}
           options={["Kasey", "Josh", "Courtney"]}
+          onChange={event =>
+            store.dispatch(loginUserAction(event.target.value))
+          }
         />
         <CardActions
           style={{
@@ -53,7 +56,9 @@ function Login() {
             outlineColor="var(--mdc-theme-primary)"
             backgroundColor="#fff"
           >
-            <Button outlined onClick={() => store.dispatch(loginUserAction('Kasey'))}>LOGIN</Button>
+            <Button outlined onClick={() => console.log("LOGIN")}>
+              LOGIN
+            </Button>
           </ShapeContainer>
         </CardActions>
       </Card>
