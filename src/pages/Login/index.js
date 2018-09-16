@@ -11,59 +11,78 @@ import "@material/notched-outline/dist/mdc.notched-outline.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
 
 import { Button } from "@rmwc/button";
-import { ShapeContainer } from "@rmwc/shape";
 import { Card, CardActions } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { Select } from "@rmwc/select";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { loginUserAction } from "../../actions/app";
 import { store } from "../../store";
 
-function Login() {
-  return (
-    <div className={style.login}>
-      <Card
-        style={{
-          width: "100%",
-          padding: "1rem"
-        }}
-      >
-        <Typography className={style.header} use="headline1" tag="h1">
-          Login
-        </Typography>
-        <Select
-          label="Account"
-          outlined
-          placeholder=""
-          className={style.select}
-          options={["Kasey", "Josh", "Courtney"]}
-          onChange={event =>
-            store.dispatch(loginUserAction(event.target.value))
-          }
-        />
-        <CardActions
+class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loginEnabled: false
+    };
+  }
+
+  handleAccountSelect = event => {
+    const selected = event.target.value;
+    store.dispatch(loginUserAction(selected));
+    this.setState({ loginEnabled: true });
+  };
+
+  render() {
+    const usersFromProps =
+      this.props && this.props.users && this.props.users.users
+        ? Object.values(this.props.users.users)
+        : [];
+    const users = usersFromProps.map(user => user.id);
+    return (
+      <div className={style.login}>
+        <Card
           style={{
-            flexDirection: "column",
-            alignItems: "flex-end",
-            padding: "0 1rem"
+            width: "100%",
+            padding: "1rem"
           }}
         >
-          <ShapeContainer
-            className={style.shape}
-            topLeftCorner="10"
-            bottomRightCorner="10"
-            outlineWidth="2"
-            outlineColor="var(--mdc-theme-primary)"
-            backgroundColor="#fff"
+          <Typography className={style.header} use="headline2" tag="h2">
+            Select An Account
+          </Typography>
+          <Select
+            label="Account"
+            outlined
+            placeholder=""
+            disabled={users.length < 1}
+            className={style.select}
+            options={users}
+            onChange={this.handleAccountSelect.bind(this)}
+          />
+          <CardActions
+            style={{
+              flexDirection: "column",
+              alignItems: "flex-end",
+              padding: "0 1rem"
+            }}
           >
-            <Button outlined onClick={() => console.log("LOGIN")}>
-              LOGIN
-            </Button>
-          </ShapeContainer>
-        </CardActions>
-      </Card>
-    </div>
-  );
+            <Link to={this.state.loginEnabled ? "/" : "#"}>
+              <Button disabled={!this.state.loginEnabled} outlined>
+                LOGIN
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
+      </div>
+    );
+  }
 }
 
-export default HMR(Login, module);
+const mapStateToProps = state => {
+  return {
+    users: state.users
+  };
+};
+
+export default HMR(connect(mapStateToProps)(Login), module);

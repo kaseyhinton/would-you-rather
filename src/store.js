@@ -3,7 +3,11 @@ import thunk from "redux-thunk";
 import app from "./reducers/app";
 import users from "./reducers/users";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  app: {
+    user: ""
+  }
+};
 
 export const store = createStore(
   combineReducers({
