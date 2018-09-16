@@ -35,11 +35,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const usersFromProps =
-      this.props && this.props.users && this.props.users.users
-        ? Object.values(this.props.users.users)
-        : [];
-    const users = usersFromProps.map(user => user.id);
+    const users =
+      this.props && this.props.users && this.props.users.map(user => user.id);
     return (
       <div className={style.login}>
         <Card
@@ -81,7 +78,7 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: Object.values(state.users.users || {})
   };
 };
 
