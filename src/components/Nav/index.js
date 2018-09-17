@@ -16,7 +16,6 @@ class Nav extends React.Component {
             user => user.id === this.props.userId
           )[0].avatarURL
         : null;
-    console.log(profileUrl);
     return (
       <nav className={style.nav}>
         <Button>

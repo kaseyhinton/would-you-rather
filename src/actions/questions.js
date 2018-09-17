@@ -8,7 +8,7 @@ export const ADD_QUESTION = "ADD_QUESTION";
 export const addQuestionAsync = question => {
   return dispatch => {
     return _saveQuestion(question).then(
-      q => dispatch(addQuestion(q)),
+      result => dispatch(addQuestion(result)),
       error => dispatch(apologize(error))
     );
   };
