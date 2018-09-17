@@ -31,6 +31,9 @@ class Nav extends React.Component {
         <Button>
           <Link to="/login">Login</Link>
         </Button>
+        <Button>
+          <Link to="/add">Add</Link>
+        </Button>
         {
           <img
             style={{ borderRadius: "50%", height: "40px", width: "40px" }}
