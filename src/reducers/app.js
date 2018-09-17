@@ -1,6 +1,6 @@
 import { LOGIN_USER, APOLOGIZE } from "../actions/app";
 
-const app = (state = {}, action) => {
+const app = (state = { user: "" }, action) => {
   switch (action.type) {
     case LOGIN_USER:
       return {

@@ -2,17 +2,15 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import app from "./reducers/app";
 import users from "./reducers/users";
+import questions from "./reducers/questions";
 
-const INITIAL_STATE = {
-  app: {
-    user: ""
-  }
-};
+const INITIAL_STATE = {};
 
 export const store = createStore(
   combineReducers({
     app,
-    users
+    users,
+    questions
   }),
   INITIAL_STATE,
   applyMiddleware(thunk),
