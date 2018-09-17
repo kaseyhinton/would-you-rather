@@ -12,7 +12,7 @@ const questions = (state = {}, action) => {
         ...state,
         questions: {
           ...state.questions,
-          question: action.question
+          [action.question.id]: action.question
         }
       }
     default:
