@@ -1,27 +1,73 @@
-import React from 'react';
-import { HMR } from '@pwa/preset-react';
-import style from './index.css';
+import React from "react";
+import { HMR } from "@pwa/preset-react";
+import style from "./index.css";
 import { getQuestions } from "../../actions/questions";
 import { getUsers } from "../../actions/users";
-import { store } from '../../store';
+import { store } from "../../store";
+import Poll from "../../components/Poll";
+import { connect } from "react-redux";
 
 class Home extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      user: {}
+    };
+  }
 
-	componentWillMount() {
-		store.dispatch(getQuestions());
-		store.dispatch(getUsers());
-	}
+  componentDidMount() {
+    store.dispatch(getQuestions());
+    store.dispatch(getUsers());
+  }
 
-	render() {
-		return (
-		<div className={ style.home }>
-			<div className={ style.titles }>
-				<h1>Would You Rather?</h1>
-				<h3>A Game Of Choices</h3>
-			</div>
-		</div>
-	);
-	}
+  static getDerivedStateFromProps(props, state) {
+    const user = props.users.filter(o => o.id === props.userId)[0];
+
+    if (!user) return {};
+
+    const unansweredQuestions = [];
+    const answeredQuestions = [];
+
+    props.questions.forEach(o => {
+      if (user.answers[o.id]) answeredQuestions.push(o);
+      else unansweredQuestions.push(o);
+    });
+
+    return {
+      user,
+      answeredQuestions,
+      unansweredQuestions
+    };
+  }
+
+  render() {
+    return (
+      <div className={style.home}>
+        <div className={style.titles}>
+          <h1>Would You Rather?</h1>
+          <h3>A Game Of Choices</h3>
+
+          <h4>Unanswered Questions</h4>
+          {this.state.unansweredQuestions &&
+            this.state.unansweredQuestions.map(question => (
+              <Poll key={question.id} userId={this.props.userId} question={question} />
+            ))}
+
+          <h4>Answered Questions</h4>
+          {this.state.answeredQuestions &&
+            this.state.answeredQuestions.map(o => <li key={o.id}>{o.id}</li>)}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default HMR(Home, module);
+const mapStateToProps = state => {
+  return {
+    questions: Object.values(state.questions.questions || {}),
+    users: Object.values(state.users.users || {}),
+    userId: state.app.user
+  };
+};
+
+export default HMR(connect(mapStateToProps)(Home), module);
