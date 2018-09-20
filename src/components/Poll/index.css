@@ -11,6 +11,16 @@
   text-transform: initial;
 }
 
+.resultsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row !important;
+}
+
+.result {
+  margin: 16px;
+}
+
 .card h2 {
   padding-top: 16px;
 }

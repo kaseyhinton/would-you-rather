@@ -4,7 +4,10 @@ import "@material/card/dist/mdc.card.css";
 import "@material/radio/dist/mdc.radio.css";
 import "@material/button/dist/mdc.button.css";
 import "@material/form-field/dist/mdc.form-field.css";
+import '@material/linear-progress/dist/mdc.linear-progress.css';
 
+import { LinearProgress } from '@rmwc/linear-progress';
+import { Typography } from '@rmwc/typography';
 import { Card, CardPrimaryAction, CardAction, CardActions } from "@rmwc/card";
 import { Radio } from "@rmwc/radio";
 
@@ -29,9 +32,14 @@ export default class Poll extends React.Component {
   }
 
   render() {
+    const optionOneVotes = this.props.question.optionOne.votes.length;
+    const optionTwoVotes = this.props.question.optionTwo.votes.length;
+    const totalVotes = optionOneVotes + optionTwoVotes;
+    console.log(this.props);
     return (
       <div className={style.poll}>
-        <Card className={style.card}>
+      {!this.props.answered ?
+          <Card className={style.card}>
           <h2>{this.props.question.author}</h2>
           <div className={style.options}>
             <h3>Would you rather?</h3>
@@ -59,7 +67,38 @@ export default class Poll extends React.Component {
               SUBMIT
             </CardAction>
           </CardActions>
-        </Card>
+        </Card> :
+          <Card className={style.card}>
+            <h3>Results</h3>
+            <div className={style.resultsContainer}>
+              <div className={style.result}>
+              <Typography use="headline3" tag="h3">
+                {(optionOneVotes / totalVotes * 100).toFixed(1)} %
+                </Typography>
+                <Typography use="headline4" tag="h4">
+                {optionOneVotes} {optionOneVotes === 1 ? 'Vote' : 'Votes'}
+                </Typography>
+                <Typography use="body1" tag="p" theme="text-secondary-on-background">
+                Would rather {this.props.question.optionOne.text}
+                <br />
+                </Typography>
+              </div>
+              <div className={style.result}>
+              <Typography use="headline3" tag="h3">
+                {(optionTwoVotes / totalVotes * 100).toFixed(1)} %
+                </Typography>
+                 <Typography use="headline4" tag="h4">
+                 {optionTwoVotes}  {optionTwoVotes === 1 ? 'Vote' : 'Votes'}
+                </Typography>
+                <Typography use="body1" tag="p" theme="text-secondary-on-background">
+                  Would rather {this.props.question.optionTwo.text}
+                  <br />
+                </Typography>
+              </div>
+            </div>
+          </Card>
+    }
+    
       </div>
     );
   }
