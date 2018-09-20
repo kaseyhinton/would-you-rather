@@ -55,7 +55,9 @@ class Home extends React.Component {
 
           <h4>Answered Questions</h4>
           {this.state.answeredQuestions &&
-            this.state.answeredQuestions.map(o => <li key={o.id}>{o.id}</li>)}
+            this.state.answeredQuestions.map(question => (
+              <Poll answered={true} key={question.id} userId={this.props.userId} question={question} />
+            ))}
         </div>
       </div>
     );
