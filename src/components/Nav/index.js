@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 class Nav extends React.Component {
   render() {
-    console.log(this.props);
     const profileUrl =
       this.props &&
       this.props.users &&
