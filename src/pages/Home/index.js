@@ -1,11 +1,15 @@
 import React from "react";
 import { HMR } from "@pwa/preset-react";
+import "@material/fab/dist/mdc.fab.css";
 import style from "./index.css";
+
 import { getQuestions } from "../../actions/questions";
 import { getUsers } from "../../actions/users";
 import { store } from "../../store";
 import Poll from "../../components/Poll";
 import { connect } from "react-redux";
+import { Fab } from "@rmwc/fab";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   constructor() {
@@ -50,15 +54,27 @@ class Home extends React.Component {
           <h4>Unanswered Questions</h4>
           {this.state.unansweredQuestions &&
             this.state.unansweredQuestions.map(question => (
-              <Poll key={question.id} userId={this.props.userId} question={question} />
+              <Poll
+                key={question.id}
+                userId={this.props.userId}
+                question={question}
+              />
             ))}
 
           <h4>Answered Questions</h4>
           {this.state.answeredQuestions &&
             this.state.answeredQuestions.map(question => (
-              <Poll answered={true} key={question.id} userId={this.props.userId} question={question} />
+              <Poll
+                answered={true}
+                key={question.id}
+                userId={this.props.userId}
+                question={question}
+              />
             ))}
         </div>
+        <Link to="/add">
+          <Fab className={style.fab} icon="add" label="Add Question" />
+        </Link>
       </div>
     );
   }

@@ -21,3 +21,9 @@
 	font-size: 1.25em;
 	color: #5e7283;
 }
+
+.fab {
+	position: fixed;
+    bottom: 24px;
+    right: 24px;
+}
