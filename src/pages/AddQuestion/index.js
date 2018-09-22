@@ -7,14 +7,15 @@ import "@material/card/dist/mdc.card.css";
 import "@material/floating-label/dist/mdc.floating-label.css";
 import "@material/notched-outline/dist/mdc.notched-outline.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
-import '@material/notched-outline/dist/mdc.notched-outline.css';
-import '@material/textfield/dist/mdc.textfield.css';
+import "@material/notched-outline/dist/mdc.notched-outline.css";
+import "@material/textfield/dist/mdc.textfield.css";
 
 import { TextField } from "@rmwc/textfield";
 import { Button } from "@rmwc/button";
 import { Card, CardActions } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { addQuestionAsync } from "../../actions/questions";
 import { store } from "../../store";
@@ -29,11 +30,11 @@ class AddQuestion extends React.Component {
   }
 
   handleOptionOne = event => {
-    this.setState({optionOne: event.target.value});
+    this.setState({ optionOne: event.target.value });
   };
 
   handleOptionTwo = event => {
-    this.setState({optionTwo: event.target.value});
+    this.setState({ optionTwo: event.target.value });
   };
 
   handleSaveQuestion = () => {
@@ -41,7 +42,7 @@ class AddQuestion extends React.Component {
       author: this.props.userId,
       optionOneText: this.state.optionOne,
       optionTwoText: this.state.optionTwo
-    }
+    };
     store.dispatch(addQuestionAsync(question));
   };
 
@@ -58,11 +59,11 @@ class AddQuestion extends React.Component {
             Add Question
           </Typography>
           <Typography className={style.header} use="headline4" tag="h4">
-          Would you rather?
+            Would you rather?
           </Typography>
           <TextField onChange={this.handleOptionOne.bind(this)} outlined />
           <Typography className={style.header} use="headline4" tag="h4">
-          Or
+            Or
           </Typography>
           <TextField onChange={this.handleOptionTwo.bind(this)} outlined />
 
@@ -70,12 +71,19 @@ class AddQuestion extends React.Component {
             style={{
               flexDirection: "column",
               alignItems: "flex-end",
-              padding: "0 1rem"
+              padding: "0"
             }}
           >
-            <Button onClick={this.handleSaveQuestion.bind(this)} disabled={!this.state.optionOne || !this.state.optionTwo} outlined>
-              SAVE
-            </Button>
+            <Link to={!this.state.optionOne || !this.state.optionTwo ? '#' : '/'}>
+              <Button
+              className={style.saveButton}
+                onClick={this.handleSaveQuestion.bind(this)}
+                disabled={!this.state.optionOne || !this.state.optionTwo}
+                outlined
+              >
+                SAVE
+              </Button>
+            </Link>
           </CardActions>
         </Card>
       </div>
