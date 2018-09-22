@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import LeaderboardItem from '../../components/LeaderboardItem';
 
 function LeaderBoard(props) {
-	console.log(props);
 	return (
 		<div className={ style.leaderboard }>
 			<div className={ style.titles }>

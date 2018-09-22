@@ -40,7 +40,6 @@ export default class Poll extends React.Component {
         user => user.id === this.props.question.author
       )[0];
 
-    console.log(this.props);
     return (
       <div className={style.poll}>
         {!this.props.answered ? (

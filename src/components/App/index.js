@@ -10,10 +10,6 @@ import { store } from "../../store";
 import { getUsers } from "../../actions/users";
 import { getQuestions } from "../../actions/questions";
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-
 // Route-Split Components
 const loading = () => <div>Loading...</div>;
 const load = loader => Loadable({ loader, loading });
