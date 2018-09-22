@@ -6,9 +6,8 @@ import "@material/button/dist/mdc.button.css";
 import "@material/form-field/dist/mdc.form-field.css";
 import "@material/linear-progress/dist/mdc.linear-progress.css";
 
-import { LinearProgress } from "@rmwc/linear-progress";
 import { Typography } from "@rmwc/typography";
-import { Card, CardPrimaryAction, CardAction, CardActions } from "@rmwc/card";
+import { Card, CardAction, CardActions } from "@rmwc/card";
 import { Radio } from "@rmwc/radio";
 
 import { answerQuestionAsync } from "../../actions/questions";

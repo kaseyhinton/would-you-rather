@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./index.css";
 import "@material/button/dist/mdc.button.css";
-import { Button } from "rmwc/button";
 import { connect } from "react-redux";
 import { Typography } from "@rmwc/typography";
 
