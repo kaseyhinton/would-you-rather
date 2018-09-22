@@ -37,7 +37,7 @@
 	opacity: .7;
 }
 
-.link:nth-child(2) {
+.link:nth-child(3) {
   display: flex;
   flex: 1 1 auto;
 }
