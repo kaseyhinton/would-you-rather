@@ -44,8 +44,8 @@ class Home extends React.Component {
     return (
       <div className={style.home}>
         <div className={style.titles}>
-          <h1>Would You Rather?</h1>
-          <h3>A Game Of Choices</h3>
+          <h1>A Game Of Choices</h1>
+          <h3>What Would You Rather?</h3>
 
           <h4>Unanswered Questions</h4>
           {this.state.unansweredQuestions &&

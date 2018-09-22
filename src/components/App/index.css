@@ -7,7 +7,7 @@
 }
 
 .wrapper {
-	width: 75%;
+	width: 500px;
 	margin: 0 auto;
 	position: relative;
 	min-height: 100vh;
@@ -15,6 +15,7 @@
 
 @media screen and (max-width: 769px) {
 	.wrapper {
-		width: 90%;
+		width: 100%;
+		padding: 0 8px;
 	}
 }
