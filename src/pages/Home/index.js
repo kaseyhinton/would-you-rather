@@ -51,23 +51,23 @@ class Home extends React.Component {
           <h1>A Game Of Choices</h1>
           <h3>What Would You Rather?</h3>
 
-          <h4>Unanswered Questions</h4>
           {this.state.unansweredQuestions &&
             this.state.unansweredQuestions.map(question => (
               <Poll
                 key={question.id}
                 userId={this.props.userId}
+                users={this.props.users}
                 question={question}
               />
             ))}
 
-          <h4>Answered Questions</h4>
           {this.state.answeredQuestions &&
             this.state.answeredQuestions.map(question => (
               <Poll
                 answered={true}
                 key={question.id}
                 userId={this.props.userId}
+                users={this.props.users}
                 question={question}
               />
             ))}
