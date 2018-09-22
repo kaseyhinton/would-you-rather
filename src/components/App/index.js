@@ -34,6 +34,7 @@ class App extends React.Component {
 
     store.dispatch(getUsers());
     store.dispatch(getQuestions());
+    this.props.history.push(`/login`);
   }
 
   render() {
