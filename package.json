@@ -1,9 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "pwa export --routes /about,/blog,/",
-    "start": "sirv build -s",
-    "watch": "pwa watch"
+    "start": "pwa watch"
   },
   "dependencies": {
     "ganalytics": "latest",
