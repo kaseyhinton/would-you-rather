@@ -73,6 +73,7 @@ export default class Poll extends React.Component {
               <CardAction
                 className={style.cardAction}
                 onClick={this.handleSubmit.bind(this)}
+                disabled={this.state.value === ""}
               >
                 SUBMIT
               </CardAction>
