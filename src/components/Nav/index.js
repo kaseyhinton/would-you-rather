@@ -21,6 +21,7 @@ class Nav extends React.Component {
         {this.props.userId && (
           <div className={style.linksContainer}>
               <Link className={style.link} to="/">Home</Link>
+              <Link className={style.link} to="/add">Add</Link>
               <Link className={style.link} to="/leaderboard">Leaderboard</Link>
               <Link className={style.link} to="/login">Change User</Link>
             {
