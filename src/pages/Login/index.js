@@ -14,7 +14,7 @@ import { Button } from "@rmwc/button";
 import { Card, CardActions } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { Select } from "@rmwc/select";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { loginUserAction } from "../../actions/app";
@@ -24,15 +24,20 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      loginEnabled: false
+      loginEnabled: false,
+      selectedUser: {}
     };
   }
 
   handleAccountSelect = event => {
-    const selected = event.target.value;
-    store.dispatch(loginUserAction(selected));
-    this.setState({ loginEnabled: true });
+    const selectedUser = event.target.value;
+    this.setState({ loginEnabled: true, selectedUser });
   };
+
+  handleUserLogin = () => {
+    store.dispatch(loginUserAction(this.state.selectedUser));
+    this.props.history.push(this.props.redirectTo || "/");
+  }
 
   render() {
     const users =
@@ -64,11 +69,9 @@ class Login extends React.Component {
               padding: "0 1rem"
             }}
           >
-            <Link to={this.state.loginEnabled ? this.props.redirectTo || "/" : "#"}>
-              <Button disabled={!this.state.loginEnabled} outlined>
-                LOGIN
-              </Button>
-            </Link>
+            <Button disabled={!this.state.loginEnabled} onClick={() => this.handleUserLogin()} outlined>
+              LOGIN
+            </Button>
           </CardActions>
         </Card>
       </div>
@@ -82,4 +85,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default HMR(connect(mapStateToProps)(Login), module);
+export default HMR(connect(mapStateToProps)(withRouter(Login)), module);
