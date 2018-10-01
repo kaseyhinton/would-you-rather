@@ -64,7 +64,7 @@ class Login extends React.Component {
               padding: "0 1rem"
             }}
           >
-            <Link to={this.state.loginEnabled ? "/" : "#"}>
+            <Link to={this.state.loginEnabled ? this.props.redirectTo || "/" : "#"}>
               <Button disabled={!this.state.loginEnabled} outlined>
                 LOGIN
               </Button>
