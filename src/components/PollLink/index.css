@@ -1,0 +1,56 @@
+.poll {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  display: flex;
+  flex: 1 1 auto;
+  margin: 16px;
+  padding: 8px;
+  text-transform: initial;
+}
+
+.resultsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row !important;
+}
+
+.result {
+  margin: 16px;
+}
+
+.card h2 {
+  padding-top: 16px;
+}
+
+.cardActions {
+  justify-content: flex-end;
+}
+
+.options {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .poll {
+    flex-direction: column;
+  }
+}
