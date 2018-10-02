@@ -19,6 +19,9 @@ const LeaderBoard = load(() => import("@pages/LeaderBoard"));
 const Login = load(() => import("@pages/Login"));
 const AddQuestion = load(() => import("@pages/AddQuestion"));
 const NoMatch = load(() => import("@pages/NoMatch"));
+const Question = load(() => import("@pages/Question"));
+
+const PATHS = ["", "leaderboard", "add", "questions"];
 
 class App extends React.Component {
   constructor(){
@@ -37,11 +40,10 @@ class App extends React.Component {
 
     store.dispatch(getUsers());
     store.dispatch(getQuestions());
-    if (
-      ["/", "/leaderboard", "/add"].indexOf(
-        this.props.history.location.pathname
-      ) > -1
-    ){
+    console.log(this.props.history.location.pathname.split("/")[1]);
+
+    if (PATHS.indexOf(this.props.history.location.pathname.split("/")[1] !== -1)) {
+      console.log(this.props.history.location.pathname);
       this.setState({ redirectTo: this.props.history.location.pathname})
       this.props.history.push(`/login`);
     }
@@ -57,6 +59,7 @@ class App extends React.Component {
             <Route path="/leaderboard" exact component={LeaderBoard} />
             <Route path="/login" exact component={() => <Login redirectTo={this.state.redirectTo} />} />
             <Route path="/add" exact component={AddQuestion} />
+            <Route path="/questions/:question_id" component={Question} />
             <Route path="*" component={NoMatch} />
           </Switch>
         </main>
