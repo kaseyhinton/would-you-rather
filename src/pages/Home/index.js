@@ -6,10 +6,16 @@ import style from "./index.css";
 import { getQuestions } from "../../actions/questions";
 import { getUsers } from "../../actions/users";
 import { store } from "../../store";
-import Poll from "../../components/Poll";
+import PollLink from "../../components/PollLink";
 import { connect } from "react-redux";
 import { Fab } from "@rmwc/fab";
 import { Link } from "react-router-dom";
+import { Tab, TabBar } from "@rmwc/tabs";
+
+import '@material/tab-bar/dist/mdc.tab-bar.css';
+import '@material/tab/dist/mdc.tab.css';
+import '@material/tab-scroller/dist/mdc.tab-scroller.css';
+import '@material/tab-indicator/dist/mdc.tab-indicator.css';
 
 class Home extends React.Component {
   constructor() {
@@ -50,10 +56,16 @@ class Home extends React.Component {
         <div className={style.titles}>
           <h1>A Game Of Choices</h1>
           <h3>What Would You Rather?</h3>
-
-          {this.state.unansweredQuestions &&
+          <TabBar
+            activeTabIndex={this.state.activeTab}
+            onActivate={evt => this.setState({activeTab: evt.detail.index})}
+          >
+            <Tab>Unanswered</Tab>
+            <Tab>Answered</Tab>
+          </TabBar>
+          { this.state.activeTab === 0 && this.state.unansweredQuestions &&
             this.state.unansweredQuestions.map(question => (
-              <Poll
+              <PollLink
                 key={question.id}
                 userId={this.props.userId}
                 users={this.props.users}
@@ -61,9 +73,9 @@ class Home extends React.Component {
               />
             ))}
 
-          {this.state.answeredQuestions &&
+          {this.state.activeTab === 1 && this.state.answeredQuestions &&
             this.state.answeredQuestions.map(question => (
-              <Poll
+              <PollLink
                 answered={true}
                 key={question.id}
                 userId={this.props.userId}
