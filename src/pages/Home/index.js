@@ -21,7 +21,7 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: {}
+      activeTab: 0
     };
   }
 
@@ -30,27 +30,8 @@ class Home extends React.Component {
     store.dispatch(getUsers());
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const user = props.users.filter(o => o.id === props.userId)[0];
-
-    if (!user) return {};
-
-    const unansweredQuestions = [];
-    const answeredQuestions = [];
-
-    props.questions.forEach(o => {
-      if (user.answers[o.id]) answeredQuestions.push(o);
-      else unansweredQuestions.push(o);
-    });
-
-    return {
-      user,
-      answeredQuestions,
-      unansweredQuestions
-    };
-  }
-
   render() {
+    if(this.props.user)
     return (
       <div className={style.home}>
         <div className={style.titles}>
@@ -63,8 +44,8 @@ class Home extends React.Component {
             <Tab>Unanswered</Tab>
             <Tab>Answered</Tab>
           </TabBar>
-          { this.state.activeTab === 0 && this.state.unansweredQuestions &&
-            this.state.unansweredQuestions.map(question => (
+          { this.state.activeTab === 0 && this.props.unansweredQuestions &&
+            this.props.unansweredQuestions.map(question => (
               <PollLink
                 key={question.id}
                 userId={this.props.userId}
@@ -73,8 +54,8 @@ class Home extends React.Component {
               />
             ))}
 
-          {this.state.activeTab === 1 && this.state.answeredQuestions &&
-            this.state.answeredQuestions.map(question => (
+          {this.state.activeTab === 1 && this.props.answeredQuestions &&
+            this.props.answeredQuestions.map(question => (
               <PollLink
                 answered={true}
                 key={question.id}
@@ -93,10 +74,24 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const userId = state.app.user;
+  const users = Object.values(state.users.users || {});
+  const unansweredQuestions = [];
+  const answeredQuestions = [];
+
+  const questions = Object.values(state.questions.questions || {});
+  const user = users.filter(o => o.id === userId)[0]
+  console.log(users);
+  questions.forEach(o => {
+    if (user.answers[o.id]) answeredQuestions.push(o);
+    else unansweredQuestions.push(o);
+  });
   return {
-    questions: Object.values(state.questions.questions || {}),
-    users: Object.values(state.users.users || {}),
-    userId: state.app.user
+    unansweredQuestions,
+    answeredQuestions,
+    users,
+    userId,
+    user
   };
 };
 
