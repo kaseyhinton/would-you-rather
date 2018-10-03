@@ -13,7 +13,8 @@ function Question(props) {
 			<div className={ style.leaderboard }>
 				<div className={ style.titles }>
 					<Poll
-					answered={answered}
+					answered={Boolean(answered)}
+					chose={answered}
 					key={question.id}
 					userId={props.userId}
 					users={props.users}
