@@ -4,8 +4,6 @@ import "@material/fab/dist/mdc.fab.css";
 import style from "./index.css";
 
 import { getQuestions } from "../../actions/questions";
-import { getUsers } from "../../actions/users";
-import { store } from "../../store";
 import PollLink from "../../components/PollLink";
 import { connect } from "react-redux";
 import { Fab } from "@rmwc/fab";
@@ -26,8 +24,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    store.dispatch(getQuestions());
-    store.dispatch(getUsers());
+    this.props.getQuestions();
   }
 
   render() {
@@ -96,4 +93,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default HMR(connect(mapStateToProps)(Home), module);
+const mapDispatchToProps = {
+  getQuestions}
+
+export default HMR(connect(mapStateToProps, mapDispatchToProps)(Home), module);

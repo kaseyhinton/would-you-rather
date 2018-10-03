@@ -6,9 +6,8 @@ import Footer from "@components/Footer";
 import style from "./index.css";
 import Nav from "../Nav";
 
-import { store } from "../../store";
 import { getUsers } from "../../actions/users";
-import { getQuestions } from "../../actions/questions";
+import { connect } from "react-redux";
 
 // Route-Split Components
 const loading = () => <div>Loading...</div>;
@@ -38,8 +37,7 @@ class App extends React.Component {
       });
     }
 
-    store.dispatch(getUsers());
-    store.dispatch(getQuestions());
+    this.props.getUsers();
     console.log(this.props.history.location.pathname.split("/")[1]);
 
     if (PATHS.indexOf(this.props.history.location.pathname.split("/")[1] !== -1)) {
@@ -69,4 +67,12 @@ class App extends React.Component {
   }
 }
 
-export default HMR(withRouter(App), module);
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  getUsers
+}
+
+export default HMR(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)), module);
