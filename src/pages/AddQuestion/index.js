@@ -18,7 +18,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { addQuestionAsync } from "../../actions/questions";
-import { store } from "../../store";
 
 class AddQuestion extends React.Component {
   constructor() {
@@ -43,7 +42,7 @@ class AddQuestion extends React.Component {
       optionOneText: this.state.optionOne,
       optionTwoText: this.state.optionTwo
     };
-    store.dispatch(addQuestionAsync(question));
+    this.props.addQuestionAsync(question);
   };
 
   render() {
@@ -97,4 +96,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default HMR(connect(mapStateToProps)(AddQuestion), module);
+const mapDispatchToProps = {
+  addQuestionAsync: (question) => addQuestionAsync(question)
+}
+
+export default HMR(connect(mapStateToProps, mapDispatchToProps)(AddQuestion), module);

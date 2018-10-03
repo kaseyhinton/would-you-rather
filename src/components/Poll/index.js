@@ -1,5 +1,7 @@
 import React from "react";
 import style from "./index.css";
+import { HMR } from "@pwa/preset-react";
+
 import "@material/card/dist/mdc.card.css";
 import "@material/radio/dist/mdc.radio.css";
 import "@material/button/dist/mdc.button.css";
@@ -11,9 +13,9 @@ import { Card, CardAction, CardActions, CardMedia } from "@rmwc/card";
 import { Radio } from "@rmwc/radio";
 
 import { answerQuestionAsync } from "../../actions/questions";
-import { store } from "../../store";
+import { connect } from 'react-redux';
 
-export default class Poll extends React.Component {
+class Poll extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -27,7 +29,7 @@ export default class Poll extends React.Component {
       qid: this.props.question.id,
       answer: this.state.value
     };
-    store.dispatch(answerQuestionAsync(answerDto));
+    this.props.answerQuestionAsync(answerDto);
   }
 
   render() {
@@ -135,3 +137,13 @@ export default class Poll extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {};
+}
+
+const mapDispatchToProps = {
+  answerQuestionAsync: (dto) => answerQuestionAsync(dto)
+}
+
+export default HMR(connect(mapStateToProps, mapDispatchToProps)(Poll), module);

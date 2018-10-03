@@ -94,6 +94,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getQuestions}
+  getQuestions
+}
 
 export default HMR(connect(mapStateToProps, mapDispatchToProps)(Home), module);

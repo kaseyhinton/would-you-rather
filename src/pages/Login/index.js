@@ -18,7 +18,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { loginUserAction } from "../../actions/app";
-import { store } from "../../store";
 
 class Login extends React.Component {
   constructor() {
@@ -35,7 +34,7 @@ class Login extends React.Component {
   };
 
   handleUserLogin = () => {
-    store.dispatch(loginUserAction(this.state.selectedUser));
+    this.props.loginUserAction(this.state.selectedUser);
     this.props.history.push(this.props.redirectTo || "/");
   }
 
@@ -85,4 +84,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default HMR(connect(mapStateToProps)(withRouter(Login)), module);
+const mapDispatchToProps = {
+  loginUserAction: (selectedUser) => loginUserAction(selectedUser)
+}
+
+export default HMR(connect(mapStateToProps, mapDispatchToProps)(withRouter(Login)), module);

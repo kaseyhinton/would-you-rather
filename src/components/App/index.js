@@ -7,6 +7,7 @@ import style from "./index.css";
 import Nav from "../Nav";
 
 import { getUsers } from "../../actions/users";
+import { getQuestions } from '../../actions/questions';
 import { connect } from "react-redux";
 
 // Route-Split Components
@@ -38,10 +39,9 @@ class App extends React.Component {
     }
 
     this.props.getUsers();
-    console.log(this.props.history.location.pathname.split("/")[1]);
+    this.props.getQuestions();
 
     if (PATHS.indexOf(this.props.history.location.pathname.split("/")[1] !== -1)) {
-      console.log(this.props.history.location.pathname);
       this.setState({ redirectTo: this.props.history.location.pathname})
       this.props.history.push(`/login`);
     }
@@ -72,7 +72,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getUsers
+  getUsers,
+  getQuestions
 }
 
 export default HMR(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)), module);
