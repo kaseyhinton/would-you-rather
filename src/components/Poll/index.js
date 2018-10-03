@@ -92,13 +92,7 @@ export default class Poll extends React.Component {
             </Typography>
             <div className={style.resultsContainer}>
               <div className={style.result}>
-                <Typography use="headline2" tag="h2">
-                  {((optionOneVotes / totalVotes) * 100).toFixed(0)} %
-                </Typography>
-                <Typography use="headline4" tag="h4">
-                  ({optionOneVotes} {optionOneVotes === 1 ? "Vote" : "Votes"})
-                </Typography>
-                <Typography
+              <Typography
                   use="body1"
                   tag="p"
                   theme="text-secondary-on-background"
@@ -106,21 +100,32 @@ export default class Poll extends React.Component {
                   Would rather {this.props.question.optionOne.text}
                   <br />
                 </Typography>
+                <Typography use="headline2" tag="h2">
+                  {((optionOneVotes / totalVotes) * 100).toFixed(0)} %
+                </Typography>
+                <Typography use="body1"
+                  tag="p"
+                  theme="text-secondary-on-background">
+                  {optionOneVotes} {optionOneVotes === 1 ? "Vote" : "Votes"} {this.props.chose === "optionOne" && " (You Chose)"}
+                </Typography>
               </div>
               <div className={style.result}>
-                <Typography use="headline2" tag="h2">
-                  {((optionTwoVotes / totalVotes) * 100).toFixed(0)} %
-                </Typography>
-                <Typography use="headline4" tag="h4">
-                  ({optionTwoVotes} {optionTwoVotes === 1 ? "Vote" : "Votes"})
-                </Typography>
-                <Typography
+              <Typography
                   use="body1"
                   tag="p"
                   theme="text-secondary-on-background"
                 >
                   Would rather {this.props.question.optionTwo.text}
                   <br />
+                </Typography>
+                <Typography use="headline2" tag="h2">
+                  {((optionTwoVotes / totalVotes) * 100).toFixed(0)} %
+                </Typography>
+                <Typography 
+                  use="body1"
+                  tag="p"
+                  theme="text-secondary-on-background">
+                  {optionTwoVotes} {optionTwoVotes === 1 ? "Vote" : "Votes"} {this.props.chose === "optionTwo" && " (You Chose)"}
                 </Typography>
               </div>
             </div>
