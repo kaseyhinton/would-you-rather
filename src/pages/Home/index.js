@@ -81,11 +81,12 @@ const mapStateToProps = state => {
 
   const questions = Object.values(state.questions.questions || {});
   const user = users.filter(o => o.id === userId)[0]
-  console.log(users);
   questions.forEach(o => {
     if (user.answers[o.id]) answeredQuestions.push(o);
     else unansweredQuestions.push(o);
   });
+  // Place newly created questions at the top of the list
+  unansweredQuestions.reverse();
   return {
     unansweredQuestions,
     answeredQuestions,
