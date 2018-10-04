@@ -138,12 +138,8 @@ class Poll extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-}
-
 const mapDispatchToProps = {
   answerQuestionAsync: (dto) => answerQuestionAsync(dto)
 }
 
-export default HMR(connect(mapStateToProps, mapDispatchToProps)(Poll), module);
+export default HMR(connect(null, mapDispatchToProps)(Poll), module);
