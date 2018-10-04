@@ -67,13 +67,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
 const mapDispatchToProps = {
   getUsers,
   getQuestions
 }
 
-export default HMR(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)), module);
+export default HMR(withRouter(connect(null, mapDispatchToProps)(App)), module);

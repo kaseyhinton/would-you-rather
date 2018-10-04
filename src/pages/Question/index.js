@@ -6,9 +6,7 @@ import Poll from '../../components/Poll';
 
 function Question(props) {
 	const {question} = props;
-	console.log(props);
 	const answered = props.users.filter(user => user.id === props.userId)[0].answers[question.id];
-	console.log(answered);
 		return (
 			<div className={ style.leaderboard }>
 				<div className={ style.titles }>
@@ -26,7 +24,6 @@ function Question(props) {
 }
 
 const mapStateToProps = (state, props) => {
-	console.log();
 	return {
 		question: Object.values(state.questions.questions || {}).filter(question => question.id === props.match.params.question_id)[0],
 		users: Object.values(state.users.users || {}),
