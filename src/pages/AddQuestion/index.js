@@ -57,14 +57,10 @@ class AddQuestion extends React.Component {
           <Typography className={style.header} use="headline2" tag="h2">
             Add Question
           </Typography>
-          <Typography className={style.header} use="headline4" tag="h4">
-            Would you rather?
-          </Typography>
-          <TextField onChange={this.handleOptionOne.bind(this)} outlined />
-          <Typography className={style.header} use="headline4" tag="h4">
-            Or
-          </Typography>
-          <TextField onChange={this.handleOptionTwo.bind(this)} outlined />
+         
+          <TextField label="Would you rather?" onChange={this.handleOptionOne.bind(this)} outlined />
+          <br />
+          <TextField label="Or?" onChange={this.handleOptionTwo.bind(this)} outlined />
 
           <CardActions
             style={{
